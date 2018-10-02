@@ -1,11 +1,12 @@
 const { RTMClient, WebClient } = require("@slack/client");
 const env = require("node-env-file");
 const schedule = require("node-schedule");
-const token = "MYTOKEN";
+env(__dirname + "/.env");
+const token =  process.env.SLACK_TOKEN;
 const web = new WebClient(token);
 const rtm = new RTMClient(token);
 
-env(__dirname + "/.env");
+console.log(token)
 
 let channelID = "";
 

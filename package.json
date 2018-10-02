@@ -2,7 +2,7 @@
   "name": "slack_bot",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "jasmine ./spec/ControllerSpec.js"

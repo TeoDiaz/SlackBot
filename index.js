@@ -8,23 +8,23 @@ const rtm = new RTMClient(token);
 
 
 let channelID = "";
+let startAsk = {hour: 10, minute: 30, dayOfWeek: 5}
+let stopAsk = {hour: 12, minute: 30, dayOfWeek: 5}
 
 rtm.start();
 
 web.channels.list().then(res => {
-  let channel;
   res.channels.forEach(e => {
     if (e.is_member) channelID = e.id;
   });
 
-  rtm.sendMessage("Who wants to have lunch in the best place of the world?", channelID);
-  rtm.on('message', (event) => {
-    let msg = event.text;
-    console.log(msg)
-    if(msg == 'chicote start') {
-      rtm.sendMessage('Ey! Who is going to have lunch out today?', channelID)
-    } else if(msg == 'chicote stop') {
-      rtm.sendMessage('I Dont want to leave', channelID)
-    }
+  schedule.scheduleJob(startAsk, () => {
+    rtm.sendMessage("Hello Buddies! Who wants to go out for lunch? Make me know just saying 'me'.", channelID)
+    rtm.on('message', (event) => {
+      let message = event.text;
+      if(message == "me"){
+        rtm.sendMessage("Yeah! :the_horns:", channelID)
+      }
+    })
   })
 });

@@ -2,10 +2,11 @@ const { RTMClient, WebClient } = require("@slack/client");
 const env = require("node-env-file");
 const schedule = require("node-schedule");
 env(__dirname + "/.env");
-const token =  process.env.SLACK_TOKEN;
+const token = process.env.TOKEN;
 const web = new WebClient(token);
 const rtm = new RTMClient(token);
-
+const Actions = require("./controllers/actions");
+const botFunction = new Actions();
 
 let channelID = "";
 let startAsk = {hour: 10, minute: 30, dayOfWeek: 5}
@@ -19,12 +20,13 @@ web.channels.list().then(res => {
   });
 
   schedule.scheduleJob(startAsk, () => {
-    rtm.sendMessage("Hello Buddies! Who wants to go out for lunch? Make me know just saying 'me'.", channelID)
-    rtm.on('message', (event) => {
-      let message = event.text;
-      if(message == "me"){
-        rtm.sendMessage("Yeah! :the_horns:", channelID)
-      }
-    })
+  rtm.sendMessage("Hello Buddies! Who wants to go out for lunch? Make me know just saying 'yes'.", channelID);
+  rtm.on("message", event => {
+    botFunction.readMessage(event, rtm, channelID);
+  });
+  schedule.scheduledJob(stopAsk, () =>{
+    rtm.sendMessage("Buddies, time is over, this are the groups",channelID)
+  })
+  
   })
 });

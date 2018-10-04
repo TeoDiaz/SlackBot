@@ -19,14 +19,13 @@ web.channels.list().then(res => {
     if (e.is_member) channelID = e.id;
   });
 
-  schedule.scheduleJob(startAsk, () => {
-  rtm.sendMessage("Hello Buddies! Who wants to go out for lunch? Make me know just saying 'yes'.", channelID);
-  rtm.on("message", event => {
-    botFunction.readMessage(event, rtm, channelID);
-  });
-  schedule.scheduledJob(stopAsk, () =>{
-    rtm.sendMessage("Buddies, time is over, this are the groups",channelID)
-  })
-  
-  })
+  // schedule.scheduleJob(startAsk, () => {
+    rtm.sendMessage("Hello Buddies! Who wants to go out for lunch? Make me know just saying 'yes'.", channelID);
+    rtm.on("message", event => {
+      botFunction.readMessage(event, rtm, channelID);
+    });
+  // })
+  // schedule.scheduledJob(stopAsk, () =>{
+  //   rtm.sendMessage("Buddies, time is over, this are the groups",channelID)
+  // })
 });

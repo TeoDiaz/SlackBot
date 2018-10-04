@@ -2,8 +2,9 @@ class Actions {
   constructor() {
     this.rtm = {};
     this.channel = "";
+    this.arrUsers = [];
   }
-
+  
   readMessage(e, rtm, channel) {
     const message = e.text;
 
@@ -11,11 +12,19 @@ class Actions {
     this.channel = channel;
 
     if (message.includes("yes")) {
-      rtm.sendMessage("Yeah! :the_horns:", channel);
+      this.addUsers(e)
     } else if (message.includes("no more")) {
-      rtm.sendMessage("Goodbye Folks!", channel);
+      this.rtm.sendMessage("Goodbye Folks!", this.channel);
     }
   }
+
+
+  addUsers(e) {
+      this.arrUsers.push(e.user);
+      console.log(this.arrUsers)
+      this.rtm.sendMessage(" Yeah <@"+e.user+'> is in! :the_horns:', this.channel);
+  }
+
 }
 
 module.exports = Actions;

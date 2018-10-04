@@ -3,6 +3,7 @@ class Actions {
     this.rtm = {};
     this.channel = "";
     this.arrUsers = [];
+    this.usersInArr = 0;
   }
   
   readMessage(e, rtm, channel) {
@@ -18,13 +19,23 @@ class Actions {
     }
   }
 
+  shuffleArray(){
+    this.arrUsers.sort( () => Math.random() - 0.5 )
+  }
 
   addUsers(e) {
       this.arrUsers.push(e.user);
-      console.log(this.arrUsers)
-      this.rtm.sendMessage(" Yeah <@"+e.user+'> is in! :the_horns:', this.channel);
+      this.rtm.sendMessage(" Yeah <@"+e.user+'> is in! :the_horns:', this.channel)
+      .then( res => {
+        this.usersGroups(7)
+      })
+      .catch( err => console.log('status', err))
   }
-
+  
+  usersGroups(maxNumber){
+    this.usersInArr = this.arrUsers.length
+    this.shuffleArray()
+  }
 }
 
 module.exports = Actions;

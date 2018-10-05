@@ -17,9 +17,7 @@ class Actions {
     if (message.includes("yes")) {
       this.addUsers(e);
     } else if (message.includes("no more")) {
-      this.rtm.sendMessage("Goodbye Folks!", this.channel);
-      this.usersGroups(7);
-      this.chooseLeader();
+      
     }
   }
 
@@ -45,7 +43,9 @@ class Actions {
   }
 
   addUsers(e) {
-    if (!this.userExists(e.user)) {
+    if(this.userExists(e.user)){
+      this.rtm.sendMessage("<@" + e.user + "> keep calm, you are already in for lunch", this.channel)
+    }else if (!this.userExists(e.user)) {
       this.usersArr.push(e.user);
       this.rtm.sendMessage("Yeah <@" + e.user + "> is in! :the_horns:",this.channel);
     }

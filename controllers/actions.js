@@ -17,6 +17,8 @@ class Actions {
       this.addUsers(e);
     } else if (message.includes("no more")) {
       this.rtm.sendMessage("Goodbye Folks!", this.channel);
+      this.usersGroups(7)
+      this.chooseLeader();
     }
   }
 
@@ -30,27 +32,42 @@ class Actions {
 
   createGroups(groupNum, usersPerGroup) {
     for (let i = 0; i < groupNum; i++)
-      this.arrGroups.push(this.usersArr.splice(0, usersPerGroup));
+      this.groupsArr.push(this.usersArr.splice(0, usersPerGroup));
   }
 
   addUsers(e) {
     this.usersArr.push(e.user);
     this.rtm
       .sendMessage("Yeah <@" + e.user + "> is in! :the_horns:", this.channel)
-      .then(res => {
-        this.usersGroups(7);
-      })
-      .catch(err => console.log("status", err));
   }
 
   usersGroups(maxNumber) {
     this.usersInArr = this.usersArr.length;
     this.shuffleArray();
+
     const numGroups = this.getCeilNum(maxNumber);
     const usersPerGroup = this.getCeilNum(numGroups);
-    const smallGroupCount = usersInGroup * numGroups - this.usersInArr;
+    const smallGroupCount = usersPerGroup * numGroups - this.usersInArr;
     const bigGroupCount = numGroups - smallGroupCount;
+
     this.createGroups(bigGroupCount, usersPerGroup);
+
+    if (this.usersInArr > 7 && smallGroupCount > 0) {
+      this.createGroups(smallGroupCount, usersPerGroup - 1);
+    }
+  }
+
+  showGroups() {
+    console.log(this.groupsArr)
+    this.groupsArr.forEach((e, i) => {
+      e = e.map( e => `<@${e}>`)
+      this.rtm.sendMessage(`Group ${i+1}: ${e}`, this.channel);
+    });
+  }
+
+  chooseLeader() {
+    //here we will choose the leader, not yet
+    this.showGroups();
   }
 }
 

@@ -1,3 +1,5 @@
+const Leaders = require("../models/Leader");
+
 class Actions {
   constructor() {
     this.rtm = {};
@@ -33,11 +35,25 @@ class Actions {
 
   getLeaders() {
     this.leadersArr = this.groupsArr.map(e => e[0]);
+    this.createDB(this.leadersArr);
   }
 
   createGroups(groupNum, usersPerGroup) {
     for (let i = 0; i < groupNum; i++)
       this.groupsArr.push(this.usersArr.splice(0, usersPerGroup));
+  }
+
+  createDB(ele) {
+    ele.map(e => {
+      let newLeader = {
+        name: e
+      };
+      Leaders.create(newLeader)
+        .then(() => {
+          console.log("Creado");
+        })
+        .catch(e => console.log(e));
+    });
   }
 
   resetLists() {

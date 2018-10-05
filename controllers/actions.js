@@ -42,6 +42,12 @@ class Actions {
       this.groupsArr.push(this.usersArr.splice(0, usersPerGroup));
   }
 
+  resetLists(){
+    this.numUsers = 0
+    this.arrUsers = []
+    this.arrGroups = []
+  }
+
   addUsers(e) {
     if(this.userExists(e.user)){
       this.rtm.sendMessage("<@" + e.user + "> keep calm, you are already in for lunch", this.channel)
@@ -75,6 +81,7 @@ class Actions {
         this.channel
       );
     });
+    this.resetLists()
   }
 
   chooseLeader() {

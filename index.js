@@ -9,7 +9,7 @@ const Actions = require("./controllers/actions");
 const botFunction = new Actions();
 
 let channelID = "";
-let startAsk = {hour: 10, minute: 30, dayOfWeek: 5}
+let startAsk = {hour: 10, minute: 00, dayOfWeek: 5}
 let stopAsk = {hour: 12, minute: 30, dayOfWeek: 5}
 
 rtm.start();

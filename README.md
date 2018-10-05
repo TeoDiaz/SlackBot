@@ -19,7 +19,7 @@ Npm packages installed:
 
 ## Environment config
 
-Now, you have to create a file called .env which contains the environment variables used in this project. In this case, the variable SLACK_TOKEN is the token associated to the bot, so copy it from your bot
+Now, you have to create a file called .env which contains the environment variables used in this project. In this case, the variable TOKEN is the token associated to the bot, so copy it from your bot
 
 TOKEN=xoxb-xxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx
 

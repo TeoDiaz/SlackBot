@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose
-  .connect(`${process.env.MONGO_URL}`, {useNewUrlParser: true})
+  .connect("mongodb://localhost/slackbot", {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

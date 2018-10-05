@@ -50,7 +50,7 @@ class Actions {
     const usersPerGroup = this.getCeilNum(numGroups);
     const smallGroupCount = usersInGroup * numGroups - this.usersInArr;
     const bigGroupCount = numGroups - smallGroupCount;
-    this.createGroups(bigGroupcount, usersPerGroup);
+    this.createGroups(bigGroupCount, usersPerGroup);
   }
 }
 

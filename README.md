@@ -1,6 +1,6 @@
 <h1> My Slack Bot</h1>
  
-<h2>Slackbot Chicote</h2>
+<h2>Chicote_Bot</h2>
 
 The code application has been developed with node.js.
 
